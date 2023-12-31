@@ -2,8 +2,10 @@ import React,{ useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import {add} from '../store/CartSlice';
 import { fetchProducts,STATUSES } from '../store/ProductSlice';
+import ErrorCatch from './ErrorCatch';
+import Image from './Image';
 
-export const Products = () => {
+const Products = () => {
     // const [products, setProducts] = useState([]);
     const {data:products,status} = useSelector(state=>state.products);
     const dispatch = useDispatch();
@@ -35,7 +37,10 @@ export const Products = () => {
          {products &&
             products.map(product=>(
                 <div className="card" key={product.id}>
-                  <img src={product.image} alt="" />
+                    {/* <ErrorCatch>
+                    <Image src="" alt="" />
+                    </ErrorCatch>      */}
+                    <img src={product.image} />             
                     <h4>{product.title}</h4>
                     <h5>{product.price}</h5>
                     <button onClick={() => handleAdd(product)} className="btn">
@@ -47,3 +52,5 @@ export const Products = () => {
     </div>
   )
 }
+
+export default Products;
